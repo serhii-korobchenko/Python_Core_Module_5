@@ -20,6 +20,8 @@ print(translate("Александр Иванович"))  # Aleksandr Ivanovich
 а во втором — правильно, если имя будет все заглавными буквами. Чтобы не усложнять задачу, 
 принято как в документах — все имя печатается заглавными. """
 
+import re
+
 CYRILLIC_SYMBOLS = "абвгдеёжзийклмнопрстуфхцчшщъыьэюяєіїґ"
 TRANSLATION = ("a", "b", "v", "g", "d", "e", "e", "j", "z", "i", "j", "k", "l", "m", "n", "o", "p", "r", "s", "t", "u",
                "f", "h", "ts", "ch", "sh", "sch", "", "y", "", "e", "yu", "ya", "je", "i", "ji", "g")
@@ -38,6 +40,10 @@ for c, l in zip(CYRILLIC_SYMBOLS, TRANSLATION):
 
 
 def translate(name):
-    return name.translate(TRANS)
+    p = name.translate(TRANS)
+    result = re.sub(r'[^a-zA-Z0-9]', '_', p)
+    return result
 
-print(translate("Сергій"))
+print (TRANS)
+
+print(translate("Сергій#$%^$#&%$*^%$*&^%*&^%"))
